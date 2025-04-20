@@ -1,4 +1,4 @@
-/* LeetCode 98. Validate Binary Search Tree */
+/* LeetCode 173. Binary Search Tree Iterator */
 
 /**
  * Definition for a binary tree node.
@@ -15,16 +15,23 @@
  *     }
  * }
  */
-class Solution {
-    public boolean isValidBST(TreeNode root) {
-        ArrayList<Integer> list = inOrder(root, new ArrayList<>());
+class BSTIterator {
 
-        for (int i = 0; i < list.size() - 1; i++) {
-            if (list.get(i) >= list.get(i + 1)) return false;
-        }
+    int pointer;
+    ArrayList<Integer> nodes;
 
-        return true;
-    } 
+    public BSTIterator(TreeNode root) {
+        this.pointer = -1;
+        this.nodes = inOrder(root, new ArrayList<>());
+    }
+    
+    public int next() {
+        return nodes.get(++pointer);
+    }
+    
+    public boolean hasNext() {
+        return pointer < nodes.size() - 1;
+    }
 
     private ArrayList<Integer> inOrder(TreeNode node, ArrayList<Integer> list) {
         if (node == null) return list;
@@ -36,3 +43,10 @@ class Solution {
         return list;
     }
 }
+
+/**
+ * Your BSTIterator object will be instantiated and called as such:
+ * BSTIterator obj = new BSTIterator(root);
+ * int param_1 = obj.next();
+ * boolean param_2 = obj.hasNext();
+ */

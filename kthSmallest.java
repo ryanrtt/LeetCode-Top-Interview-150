@@ -1,4 +1,4 @@
-/* LeetCode 98. Validate Binary Search Tree */
+/* LeetCode 230. Kth Smallest Element in a BST */
 
 /**
  * Definition for a binary tree node.
@@ -16,22 +16,21 @@
  * }
  */
 class Solution {
-    public boolean isValidBST(TreeNode root) {
-        ArrayList<Integer> list = inOrder(root, new ArrayList<>());
+    public int kthSmallest(TreeNode root, int k) {
+        ArrayList<Integer> list = inOrder(root, k, new ArrayList<>());
 
-        for (int i = 0; i < list.size() - 1; i++) {
-            if (list.get(i) >= list.get(i + 1)) return false;
-        }
+        return list.get(--k);
+    }
 
-        return true;
-    } 
-
-    private ArrayList<Integer> inOrder(TreeNode node, ArrayList<Integer> list) {
+    private ArrayList<Integer> inOrder(TreeNode node, int k, ArrayList<Integer> list) {
         if (node == null) return list;
 
-        inOrder(node.left, list);
+        inOrder(node.left, k, list);
+
+        if (list.size() == k) return list;
         list.add(node.val);
-        inOrder(node.right, list);
+
+        inOrder(node.right, k, list);
 
         return list;
     }

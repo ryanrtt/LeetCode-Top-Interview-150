@@ -1,4 +1,4 @@
-/* LeetCode 226. Invert Binary Tree */
+/* LeetCode 104. Maximum Depth of Binary Tree */
 
 /**
  * Definition for a binary tree node.
@@ -16,20 +16,13 @@
  * }
  */
 class Solution {
-    public TreeNode invertTree(TreeNode root) {
-        return invert(root);
+    public int maxDepth(TreeNode root) {
+        return depth(root, 1);
     }
 
-    private TreeNode invert(TreeNode node) {
-        if (node == null) return node;
+    private int depth(TreeNode node, int depth) {
+        if (node == null) return depth - 1;
 
-        TreeNode temp = node.left;
-        node.left = node.right;
-        node.right = temp;
-
-        invert(node.left);
-        invert(node.right);
-
-        return node;
+        return Math.max(depth(node.left, depth + 1), depth(node.right, depth + 1));
     }
 }

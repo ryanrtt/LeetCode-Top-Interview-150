@@ -1,4 +1,4 @@
-/* LeetCode 98. Validate Binary Search Tree */
+/** LeetCode 530. Minimum Absolute Difference in BST */
 
 /**
  * Definition for a binary tree node.
@@ -16,23 +16,24 @@
  * }
  */
 class Solution {
-    public boolean isValidBST(TreeNode root) {
-        ArrayList<Integer> list = inOrder(root, new ArrayList<>());
+    public int getMinimumDifference(TreeNode root) {
+        List<Integer> list = inOrder(root, new ArrayList<>());
 
+        int min = Integer.MAX_VALUE;
         for (int i = 0; i < list.size() - 1; i++) {
-            if (list.get(i) >= list.get(i + 1)) return false;
+            min = Math.min(min, list.get(i + 1) - list.get(i));
         }
 
-        return true;
-    } 
+        return min;
+    }
 
-    private ArrayList<Integer> inOrder(TreeNode node, ArrayList<Integer> list) {
+    private List<Integer> inOrder(TreeNode node, ArrayList<Integer> list) {
         if (node == null) return list;
 
         inOrder(node.left, list);
         list.add(node.val);
         inOrder(node.right, list);
 
-        return list;
+        return list; 
     }
 }
