@@ -17,14 +17,19 @@
  */
 class Solution {
     public List<Double> averageOfLevels(TreeNode root) {
+        // Queue for BFS traversal
         Queue<TreeNode> queue = new ArrayDeque<>();
+
+        // List to store the average value of nodes at each level
         List<Double> list = new ArrayList<>();
         queue.offer(root);
 
+        // BFS traversal
         while(!queue.isEmpty()) {
             double sum = 0;
             int length = queue.size();
 
+            // Iterate through all nodes at the current level and get the total sum
             for (int i = 0; i < length; i++) {
                 TreeNode node = queue.poll();
                 sum += node.val;
@@ -32,6 +37,7 @@ class Solution {
                 if (node.right != null) queue.offer(node.right);
             }
 
+            // Add the average of the level to the list
             list.add(sum / length);
         }
 

@@ -15,23 +15,29 @@ class Solution {
         if (k == 0 || head == null) return head;
         int length = 0;
 
+        // Traverse through entire linked list until penultimate node
         ListNode dummy = head;
         while (dummy.next != null) {
             length++;
             dummy = dummy.next;
         }
-
         length++;
+
+        // Set the final node's pointer to the head of the list to create a cycle
         dummy.next = head;
         dummy = head;
 
+        // Calculate shift position
         int shift = (k % length) + 1;
         int count = 0;
+
+        // Get the position of the new end node 
         while (count < length - shift) {
             count++;
             dummy = dummy.next;
         }
 
+        // Set the final node's pointer to null after shifting 
         ListNode temp = dummy.next;
         dummy.next = null;
 

@@ -20,18 +20,25 @@ class Solution {
         if (root == null) return new ArrayList<List<Integer>>();
 
         List<List<Integer>> answer = new ArrayList<List<Integer>>();
+
+        // Deque for BFS traversal
         Deque<TreeNode> deque = new LinkedList<>();
 
+        // To alternate between traversal directions
         boolean reverse = false;
 
         deque.addFirst(root);
+
+        // BFS traversal
         while (!deque.isEmpty()) {
             int count = deque.size();
             List<Integer> list = new ArrayList<>();
 
             for (int i = 0; i < count; i++) {
+                // If in reverse order, deque from the end, otherwise deque from the start
                 TreeNode node = reverse ? deque.removeLast() : deque.removeFirst();
 
+                // If in reverse order, add nodes to the start of the queue, otherwise add to the end of the queue
                 if (reverse) {
                     if (node.right != null) deque.addFirst(node.right);
                     if (node.left != null) deque.addFirst(node.left);
@@ -44,6 +51,8 @@ class Solution {
             }
 
             answer.add(list);
+
+            // Reverse ordering after each level
             reverse = !reverse;
         }
         

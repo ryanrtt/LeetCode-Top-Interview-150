@@ -20,9 +20,17 @@ class Solution {
         return depth(root, 1);
     }
 
+    /**
+     * Finds the maximum depth rooted at a node. 
+     * 
+     * @param node The current node.
+     * @param depth The current depth.
+     * @return The height of the node.
+     */
     private int depth(TreeNode node, int depth) {
         if (node == null) return depth - 1;
 
+        // Traverse and find the max depth of the left and right subtrees
         return Math.max(depth(node.left, depth + 1), depth(node.right, depth + 1));
     }
 }

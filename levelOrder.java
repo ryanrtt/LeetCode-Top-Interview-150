@@ -20,19 +20,22 @@ class Solution {
         if (root == null) return new ArrayList<List<Integer>>();
 
         List<List<Integer>> answer = new ArrayList<List<Integer>>();
-        Queue<TreeNode> queue = new LinkedList<>();
 
-        queue.add(root);
+        // Queue for BFS traversal
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+
+        // BFS traversal
         while (!queue.isEmpty()) {
             List<Integer> list = new ArrayList<>();
             int count = queue.size();
 
             for (int i = 0; i < count; i++) {
-                TreeNode node = queue.peek();
-                if (node.left != null) queue.add(node.left);
-                if (node.right != null) queue.add(node.right);
+                TreeNode node = queue.poll();
+                if (node.left != null) queue.offer(node.left);
+                if (node.right != null) queue.offer(node.right);
 
-                list.add(queue.remove().val);
+                list.add(node.val);
             }
             
             answer.add(list);

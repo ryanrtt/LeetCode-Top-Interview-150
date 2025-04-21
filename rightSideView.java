@@ -20,9 +20,12 @@ class Solution {
         if (root == null) return new ArrayList<>();
         
         List<Integer> list = new ArrayList<>();
-        Queue<TreeNode> queue = new LinkedList<>();
 
+        // Queue for BFS traversal
+        Queue<TreeNode> queue = new LinkedList<>();
         queue.add(root);
+
+        // BFS traversal
         while (!queue.isEmpty()) {
             int count = queue.size();
             for (int i = 0; i < count; i++) {
@@ -31,6 +34,7 @@ class Solution {
                 if (node.left != null) queue.add(node.left);
                 if (node.right != null) queue.add(node.right);
 
+                // If i is equal to count - 1, this must be the last node on the level, so add to the list
                 if (i == count - 1) list.add(node.val);
             }
         }
